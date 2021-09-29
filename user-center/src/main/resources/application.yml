@@ -1,0 +1,27 @@
+#配置端口
+server:
+  port: 8080
+  servlet:
+    context-path: /sdja
+#配置mysql
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.1.77:3306/huayun_test?useUncode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+#配置mybatis
+mybatis:
+  ## 配置mybatis的总配置文件路径
+  config-location: classpath:mybatis/mybatis.xml
+  ## 配置文件各个mapper xml文件的路径
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  ## 配置取别名的实体类包全路径
+  #type-aliases-package: com.tianya.springboot.mybatis.entity
+
+  #短信发送的配置类
+hwy:
+  sms:
+    url: #url地址
+    content: #【创信】你的验证码是：%s，3分钟内有效! 短信内容
+    appkey: # ed912aa8b9df84d84d1431ee69a5b46

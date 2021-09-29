@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!-- namespace必须是mapper接口的全路径 -->
+<mapper namespace="com.sdhy.mapper.UserVerifyCodeMapper">
+    <!-- id必须是mapper接口中定义的方法名，不可重载 -->
+    <resultMap id="userMap" type="com.sdhy.pojo.UserVerifyCode">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="verify_code" jdbcType="INTEGER" property="verifyCode" />
+        <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+        <result column="is_use" jdbcType="INTEGER" property="isUse" />
+        <result column="send_time" jdbcType="TIMESTAMP" property="sendTime" />
+    </resultMap>
+    <sql id="hy_user_verify_code_list">
+        id,verify_code,mobile,is_use,send_time
+    </sql>
+
+    <select id="selectByMobileAndVerifyCode" resultMap="userMap">
+        select<include refid="hy_user_verify_code_list"></include>
+        from hy_user_verify_code
+        where mobile = #{mobile} and verify_code = #{verifyCode}
+    </select>
+</mapper>

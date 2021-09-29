@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须是mapper接口的全路径 -->
+
+<mapper namespace="com.sdhy.mapper.UserCargoMapper">
+    <!-- id必须是mapper接口中定义的方法名，不可重载 -->
+    <resultMap id="userMap" type="com.sdhy.pojo.UserCargo">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="sex" jdbcType="INTEGER" property="sex" />
+        <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+        <result column="logo" jdbcType="VARCHAR" property="logo" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="register_time" jdbcType="TIMESTAMP" property="registerTime" />
+        <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+
+    </resultMap>
+    <sql id="hy_user_cargo_list">
+        id,password,sex,mobile,logo,status,register_time,last_login_time
+    </sql>
+
+    <!--创建司机端用户-->
+    <insert id="insertUserCargoAll">
+        insert into hy_user_cargo (id,password,sex,mobile,logo,status,register_time,last_login_time)
+        values(#{id},#{password},#{sex},#{mobile},#{logo},#{status},#{registerTime},#{lastLoginTime})
+    </insert>
+
+
+    <select id="selectByMobile" resultMap="userMap" >
+        select <include refid="hy_user_cargo_list"></include>
+        from hy_user_cargo
+        where mobile = #{mobile}
+    </select>
+
+</mapper>
